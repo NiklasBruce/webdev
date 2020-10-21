@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Comics</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/comics.html">Comics</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+        </nav>
+    </header>
+</head>
+<style>
+    .columns-desktop{
+        margin: auto;
+    }
+    #button{
+        margin-bottom: 2px;
+    }
+</style>
+<main>
+<body>
+    <section class=columns-desktop>
+    <div class="comic" >
+        <img src="images/webofsm2020001_cov.jpg" alt="Web of Spiderman">
+            <div class="columns">
+        <div class="title">Web of Spiderman</div>
+            <div class="price"> $15</div>
+        </div>
+            <p class ="desc"></p>
+            <button data-order="Web of Spiderman " id="button">Order</button>
+        </div>
+
+        <div class="comic" >
+            <img src="images/spiderman.jpg" alt="Spiderman">
+                <div class="columns">
+            <div class="title">Spiderman</div>
+                <div class="price"> $17</div>
+            </div>
+                <p class ="desc">  </p>
+                <button data-order="Spiderman" id="button">Order</button>
+            </div>
+        </div>
+</section>
+</body>
+</main>
+<script>
+const orderButtons = document.querySelectorAll("button[data-order]");
+orderButtons.forEach(function(button){
+    button.addEventListener("click", function(e){
+        const button = e.currentTarget;
+        const container =button.parentNode;
+
+        const order={
+            price: container.querySelector( ".price").innerText,
+            title: container.querySelector(".title").innerText,
+            id: button.getAttribute("data-order"),
+            desc: container.querySelector(".desc").innerText
+        
+    };
+    localStorage.setItem("order", JSON.stringify(order));
+    const url = window.location.href.replace("comics.html", "order.html");
+    window.location.href=url; 
+});
+});
+</script>
+<footer><nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/comics.html">Comics</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+    </ul>
+</nav></footer>
+</html>
